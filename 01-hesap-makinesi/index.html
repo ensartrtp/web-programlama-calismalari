@@ -1,0 +1,66 @@
+<html>
+<head>
+
+<title>Hesap Makinesi</title>
+<style>
+#discerceve{ width: 300px; margin: 100px auto; border: 3px solid black; padding: 20px; border-radius: 10px;}
+.display{width: 100%; height: 50px; margin-bottom: 20px; text-align: right; font-size: 24px;}
+.mavi{background-color:blue; color:white; font-size: 20px; padding: 15px;}
+.kirmizi{background-color:red; color:white; font-size: 20px; padding: 15px;}
+.yesil{background-color:green; color:white; font-size: 20px; padding: 15px;}
+.gri{background-color:darkgray; color:white; font-size: 20px; padding: 15px;}
+.buttons{display:grid; grid-template-columns: repeat(4, 1fr); grid-gap: 8px;}
+
+</style>
+
+
+</head>
+<body>
+
+
+
+	<div id="discerceve">
+	<input class="display" type="text" id="display" > </input>
+	
+		<div class="buttons" >
+		<button class="mavi" onclick="appendToDisplay('7')" >7</button> 
+		<button class="mavi" onclick="appendToDisplay('8')" >8</button> 
+		<button class="mavi" onclick="appendToDisplay('9')" >9</button> 
+		<button class="mavi" onclick="appendToDisplay('/')" >/</button> 
+		<button class="kirmizi" onclick="appendToDisplay('4')" >4</button> 
+		<button class="kirmizi" onclick="appendToDisplay('5')" >5</button> 
+		<button class="kirmizi" onclick="appendToDisplay('6')" >6</button> 
+		<button class="kirmizi" onclick="appendToDisplay('*')" >*</button>
+		<button class="yesil" onclick="appendToDisplay('1')"  >1</button> 
+		<button class="yesil" onclick="appendToDisplay('2')"  >2</button> 
+		<button class="yesil" onclick="appendToDisplay('3')"  >3</button> 
+		<button class="yesil" onclick="appendToDisplay('-')" >-</button>
+		<button class="gri" onclick="appendToDisplay('0')" >0</button> 
+		<button class="gri" onclick="calculate()" >=</button> 
+		<button class="gri" onclick="appendToDisplay('+')" >+</button> 
+		<button class="gri" onclick="clearDisplay()" >C</button> 
+		
+		</div>
+
+	</div>
+	
+	<script>
+	function appendToDisplay(value) {
+	document.getElementById('display').value += value; 
+	}
+
+	function clearDisplay() {
+	document.getElementById('display').value = 0;
+	}
+	
+	function calculate() {
+	var result = eval (document.getElementById('display').value)
+	document.getElementById('display').value = result;
+	}
+
+
+
+	</script>
+ 
+</body>
+</html>
