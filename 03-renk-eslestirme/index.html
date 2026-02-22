@@ -1,0 +1,88 @@
+<html>
+<head>
+    <title>Renk Eşleştirme Oyunu</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            text-align: center;
+            padding:20px;
+            font-family: Arial;
+            background: #f2f2f2
+        }
+        #oyun_alani {
+            width: 350px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .kart-btn {
+            width: 70px; height: 70px; border: none; border-radius: 8px; cursor: pointer; transition: transform .15a; 
+        }
+        .kart-btn:hover {
+            transform :scale(1.1);
+        }
+        .dogrues{
+            color: black;
+        }
+        .secilenler {
+            border: 3px solid white !important;
+        }
+    </style>
+    </head>
+
+
+
+    <body>
+        <h1 >Renk Eşleştirme Oyunu</h1>
+        <div id="oyun_alani">
+        <button class="kart-btn" id="btn1" style="background-color: blue ;"></button>
+        <button class="kart-btn" id="btn2" style="background-color: blue ;"></button>
+        <button class="kart-btn" id="btn3" style="background-color: purple ;"></button>
+        <button class="kart-btn" id="btn4" style="background-color: purple ;"></button>
+        <button class="kart-btn" id="btn5" style="background-color: yellow ;"></button>
+        <button class="kart-btn" id="btn6" style="background-color: yellow ;"></button>
+        <button class="kart-btn" id="btn7" style="background-color: green ;"></button>
+        <button class="kart-btn" id="btn8" style="background-color: green ;"></button>
+        
+        </div>
+
+        <script>
+
+          const buttons = document.querySelectorAll(".kart-btn");
+		  let secilenler = [];
+
+		  buttons.forEach(btn => {
+		  btn.addEventListener("click", function() {
+       
+        if (secilenler.includes(this)) {
+            secilenler = secilenler.filter(b => b !== this);
+            return;
+        }
+        
+        secilenler.push(this);
+        
+        
+        if (secilenler.length === 2) {
+            const renk1 = window.getComputedStyle(secilenler[0]).backgroundColor;
+            const renk2 = window.getComputedStyle(secilenler[1]).backgroundColor;
+            
+            if (renk1 === renk2) {
+                
+                
+                secilenler[0].classList.add("dogrues");
+                secilenler[1].classList.add("dogrues");
+				secilenler[0].style.backgroundColor = "black";
+				secilenler[1].style.backgroundColor = "black";
+            }
+            
+            secilenler = [];
+        }
+    });
+});
+
+
+        </script>
+
+    </body>
+    </html>
