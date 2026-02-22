@@ -1,15 +1,15 @@
 #  Film Kartı Uygulaması - README
 
-## 📋 Proje Hakkında
+##  Proje Hakkında
 Bu web uygulaması, kullanıcıların film bilgilerini girerek dinamik bir film kartı oluşturmasını sağlar. Görsel ve kullanıcı dostu arayüzü ile film koleksiyonunuzu düzenleyebilirsiniz.
 
-### 🎯 **Temel Özellikler**
+###  **Temel Özellikler**
 - Film adı, IMDB puanı, afiş URL'si ve film açıklaması girme
 - Anlık önizleme ile film kartı oluşturma
 - Çift tıklayarak çıktı alanını düzenleme
 - Enter tuşu ile hızlı güncelleme
 
-### 📝 **Karakter Sınırlamaları**
+###  **Karakter Sınırlamaları**
 - Film adı: Maksimum 50 karakter
 - Film açıklaması: Maksimum 200 karakter
 - Canlı karakter sayacı ve uyarı sistemi
@@ -35,3 +35,4 @@ Bu web uygulaması, kullanıcıların film bilgilerini girerek dinamik bir film 
 -  Afiş URL'si geçerli bir resim linki olmalıdır.
 -  Karakter sınırı aşıldığında sayaç kırmızıya döner.
 -  Geçersiz URL girilirse afiş alanı boş görünür.
+
