@@ -1,4 +1,4 @@
-# ⏳ Pomodoro Saati | <a href="[https://github.com/kullaniciadin/web-programlama-calismalari](https://ensartrtp.github.io/web-programlama-calismalari/02-pomodoro-saati/)" target="_blank">
+# ⏳ Pomodoro Saati  <a href="https://ensartrtp.github.io/web-programlama-calismalari/02-pomodoro-saati/" target="_blank">
    🔗 Deneme Linki
 </a>
 
@@ -16,6 +16,7 @@ Odaklanma sürelerinizi yönetmek ve verimliliğinizi artırmak için tasarlanm�
 * **Dil:** HTML5, CSS3, JavaScript (Vanilla JS).
 * **Ses:** `AudioContext` kullanılarak tarayıcı tabanlı ses üretimi yapılmıştır.
 * **Mantık:** `setInterval` ile saniye tabanlı geri sayım ve modlar arası otomatik geçiş.
+
 
 
 
