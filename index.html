@@ -22,11 +22,12 @@
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             transition: transform 0.3s;
+            cursor: pointer; /* Tıklanabilir olduğunu gösterir */
         }
         .proje:hover {
             transform: scale(1.02);
         }
-        a {
+        .proje a {
             text-decoration: none;
             color: #333;
             font-size: 20px;
@@ -36,6 +37,19 @@
         .proje p {
             color: #666;
             margin-top: 10px;
+        }
+        .proje small {
+            display: block;
+            margin-top: 10px;
+        }
+        .proje small a {
+            font-size: 14px;
+            font-weight: normal;
+            display: inline;
+            color: #0066cc;
+        }
+        .proje small a:hover {
+            text-decoration: underline;
         }
         .github-link {
             text-align: center;
@@ -48,25 +62,66 @@
             color: #24292e;
             font-size: 16px;
         }
+        .yapim-asamasinda {
+            opacity: 0.8;
+            background: #f0f0f0;
+            border: 2px dashed #999;
+        }
+        .yapim-asamasinda:hover {
+            transform: scale(1.02);
+        }
+        .yapim-asamasinda .tag {
+            display: inline-block;
+            background: #ff9800;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
     <h1>🚀 Web Programlama Çalışmalarım</h1>
     
-    <div class="proje">
+    <!-- Proje 1 - Hesap Makinesi -->
+    <div class="proje" onclick="window.location='01-hesap-makinesi/';">
         <a href="01-hesap-makinesi/">🧮 Hesap Makinesi</a>
         <p>Temel 4 işlem yapabilen hesap makinesi</p>
-        <small>🔗 Canlı: <a href="https://ensartrtp.github.io/web-programlama-calismalari/01-hesap-makinesi/" target="_blank">GitHub Pages</a></small>
+        <small>🔗 Canlı: <a href="https://ensartrtp.github.io/web-programlama-calismalari/01-hesap-makinesi/" target="_blank" onclick="event.stopPropagation();">GitHub Pages</a></small>
     </div>
     
-    <div class="proje">
+    <!-- Proje 2 - Pomodoro Saati -->
+    <div class="proje" onclick="window.location='02-pomodoro-saati/';">
         <a href="02-pomodoro-saati/">⏰ Pomodoro Saati</a>
         <p>25 dakika çalışma, 5 dakika mola prensibiyle zamanlayıcı</p>
-        <small>🔗 Canlı: <a href="https://ensartrtp.github.io/web-programlama-calismalari/02-pomodoro-saati/" target="_blank">GitHub Pages</a></small>
+        <small>🔗 Canlı: <a href="https://ensartrtp.github.io/web-programlama-calismalari/02-pomodoro-saati/" target="_blank" onclick="event.stopPropagation();">GitHub Pages</a></small>
+    </div>
+    
+
+    <div class="proje yapim-asamasinda" onclick="window.location='03-renk-oyunu/';">
+        <a href="03-renk-oyunu/">🎨 Renk Eşleştirme Oyunu <span class="tag">Yapım Aşamasında</span></a>
+        <p>Hafıza oyunu, renk çiftlerini bulma (Çok yakında...)</p>
+        <small>🔗 Canlı: <a href="#" onclick="alert('Bu proje henüz yayında değil! Yakında eklenecek.'); event.stopPropagation(); return false;">Yakında</a></small>
+    </div>
+    
+    
+    <div class="proje yapim-asamasinda" onclick="window.location='04-film-formu/';">
+        <a href="04-film-formu/">🎬 Film Bilgi Kartı <span class="tag">Yapım Aşamasında</span></a>
+        <p>Formdan girilen bilgilerle film kartı oluşturma (Çok yakında...)</p>
+        <small>🔗 Canlı: <a href="#" onclick="alert('Bu proje henüz yayında değil! Yakında eklenecek.'); event.stopPropagation(); return false;">Yakında</a></small>
     </div>
     
     <div class="github-link">
         📂 <a href="https://github.com/ensartrtp/web-programlama-calismalari" target="_blank">GitHub'da Görüntüle</a>
     </div>
+
+    <script>
+        document.querySelectorAll('.proje small a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.stopPropagation(); 
+            });
+        });
+    </script>
 </body>
 </html>
