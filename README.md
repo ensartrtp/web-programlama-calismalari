@@ -2,7 +2,7 @@
 
 Bu repoda HTML, CSS ve JavaScript kullanarak geliştirdiğim küçük çaplı web projeleri bulunmaktadır. Her bir proje farklı bir konsepti öğrenmek ve uygulamak amacıyla hazırlanmıştır.
 
-##  Canlı Demo 🔗 <a href="https://ensartrtp.github.io/web-programlama-calismalari/">
+## <a href="https://ensartrtp.github.io/web-programlama-calismalari/">Canlı Demo 🔗 </a>
 
 ## 🎯 Amaç
 
