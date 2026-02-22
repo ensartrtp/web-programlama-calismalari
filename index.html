@@ -14,6 +14,7 @@
         h1 {
             color: #333;
             text-align: center;
+            margin-bottom: 40px;
         }
         .proje {
             background: white;
@@ -21,108 +22,141 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            cursor: pointer; /* Tıklanabilir olduğunu gösterir */
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border-left: 5px solid #4CAF50;
         }
         .proje:hover {
             transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: #fafafa;
         }
-        .proje a {
-            text-decoration: none;
+        .proje-baslik {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .proje-baslik h2 {
+            margin: 0;
             color: #333;
             font-size: 20px;
-            font-weight: bold;
-            display: block;
         }
         .proje p {
             color: #666;
             margin-top: 10px;
+            margin-bottom: 10px;
         }
-        .proje small {
-            display: block;
-            margin-top: 10px;
+        .proje-icon {
+            font-size: 24px;
         }
-        .proje small a {
+        .linkler {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .deneme-link {
+            background: #4CAF50;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
             font-size: 14px;
-            font-weight: normal;
-            display: inline;
-            color: #0066cc;
+            transition: background 0.3s;
         }
-        .proje small a:hover {
-            text-decoration: underline;
+        .deneme-link:hover {
+            background: #45a049;
         }
-        .github-link {
+        .proje-link {
+            background: #2196F3;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        .proje-link:hover {
+            background: #0b7dda;
+        }
+        .not {
             text-align: center;
             margin-top: 30px;
-            padding: 20px;
-            background: #e0e0e0;
-            border-radius: 10px;
+            padding: 15px;
+            background: #fff3cd;
+            border-radius: 5px;
+            color: #856404;
         }
-        .github-link a {
-            color: #24292e;
-            font-size: 16px;
-        }
-        .yapim-asamasinda {
-            opacity: 0.8;
-            background: #f0f0f0;
-            border: 2px dashed #999;
-        }
-        .yapim-asamasinda:hover {
-            transform: scale(1.02);
-        }
-        .yapim-asamasinda .tag {
-            display: inline-block;
-            background: #ff9800;
-            color: white;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            margin-left: 10px;
+        .not a {
+            color: #856404;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <h1>🚀 Web Programlama Çalışmalarım</h1>
     
-    <!-- Proje 1 - Hesap Makinesi -->
-    <div class="proje" onclick="window.location='01-hesap-makinesi/';">
-        <a href="01-hesap-makinesi/">🧮 Hesap Makinesi</a>
-        <p>Temel 4 işlem yapabilen hesap makinesi</p>
-        <small>🔗 Canlı: <a href="https://ensartrtp.github.io/web-programlama-calismalari/01-hesap-makinesi/" target="_blank" onclick="event.stopPropagation();">GitHub Pages</a></small>
+    <!-- Hesap Makinesi -->
+    <div class="proje" onclick="window.open('https://www.online-hesap-makinesi.com/', '_blank')">
+        <div class="proje-baslik">
+            <span class="proje-icon">🧮</span>
+            <h2>Hesap Makinesi</h2>
+        </div>
+        <p>Temel 4 işlem yapabilen hesap makinesi - Toplama, çıkarma, çarpma, bölme</p>
+        <div class="linkler">
+            <a href="https://github.io/ensartrtp/web-programlama-calismalari/01-hesap-makinesi/" class="deneme-link" target="_blank" onclick="event.stopPropagation()">🔗 Deneme Linki</a>
+            <a href="01-hesap-makinesi/" class="proje-link" target="_blank" onclick="event.stopPropagation()">📂 Proje Dosyası</a>
+        </div>
     </div>
     
-    <!-- Proje 2 - Pomodoro Saati -->
-    <div class="proje" onclick="window.location='02-pomodoro-saati/';">
-        <a href="02-pomodoro-saati/">⏰ Pomodoro Saati</a>
-        <p>25 dakika çalışma, 5 dakika mola prensibiyle zamanlayıcı</p>
-        <small>🔗 Canlı: <a href="https://ensartrtp.github.io/web-programlama-calismalari/02-pomodoro-saati/" target="_blank" onclick="event.stopPropagation();">.</a></small>
+    <!-- Pomodoro Saati -->
+    <div class="proje" onclick="window.open('https://pomofocus.io/', '_blank')">
+        <div class="proje-baslik">
+            <span class="proje-icon">⏰</span>
+            <h2>Pomodoro Saati</h2>
+        </div>
+        <p>25 dakika çalışma, 5 dakika mola prensibiyle zamanlayıcı - Verimlilik aracı</p>
+        <div class="linkler">
+            <a href="https://pomofocus.io/" class="deneme-link" target="_blank" onclick="event.stopPropagation()">🔗 Deneme Linki</a>
+            <a href="02-pomodoro/" class="proje-link" target="_blank" onclick="event.stopPropagation()">📂 Proje Dosyası</a>
+        </div>
     </div>
     
+    <!-- Renk Eşleştirme Oyunu -->
+    <div class="proje" onclick="window.open('https://www.color-match-game.com/', '_blank')">
+        <div class="proje-baslik">
+            <span class="proje-icon">🎨</span>
+            <h2>Renk Eşleştirme Oyunu</h2>
+        </div>
+        <p>Hafıza oyunu, renk çiftlerini bul - Görsel hafıza ve renk tanıma</p>
+        <div class="linkler">
+            <a href="https://www.color-match-game.com/" class="deneme-link" target="_blank" onclick="event.stopPropagation()">🔗 Deneme Linki</a>
+            <a href="3-renk-oyunu/" class="proje-link" target="_blank" onclick="event.stopPropagation()">📂 Proje Dosyası</a>
+        </div>
+    </div>
+    
+    <!-- Film Bilgi Kartı -->
+    <div class="proje" onclick="window.open('https://www.imdb.com/', '_blank')">
+        <div class="proje-baslik">
+            <span class="proje-icon">🎬</span>
+            <h2>Film Bilgi Kartı</h2>
+        </div>
+        <p>Formdan girilen bilgilerle film kartı oluşturma - Film veritabanı uygulaması</p>
+        <div class="linkler">
+            <a href="https://www.imdb.com/" class="deneme-link" target="_blank" onclick="event.stopPropagation()">🔗 Deneme Linki</a>
+            <a href="4-film-formu/" class="proje-link" target="_blank" onclick="event.stopPropagation()">📂 Proje Dosyası</a>
+        </div>
+    </div>
 
-    <div class="proje yapim-asamasinda" onclick="window.location='03-renk-oyunu/';">
-        <a href="03-renk-oyunu/">🎨 Renk Eşleştirme Oyunu <span class="tag">Yapım Aşamasında</span></a>
-        <p>Hafıza oyunu, renk çiftlerini bulma (Çok yakında...)</p>
-        <small>🔗 Canlı: <a href="#" onclick="alert('Bu proje henüz yayında değil! Yakında eklenecek.'); event.stopPropagation(); return false;">Yakında</a></small>
+    <div class="not">
+        📌 <strong>Not:</strong> Deneme linkleri, projelerin çalışma mantığını gösteren örnek sitelere yönlendirir. 
+        Proje dosyaları ise kendi geliştirdiğiniz versiyonları içerir.
+        <br><br>
+        🔍 <strong>Alternatif deneme linkleri:</strong><br>
+        • Hesap Makinesi: <a href="https://www.desmos.com/scientific" target="_blank">Desmos</a><br>
+        • Pomodoro: <a href="https://tomato-timer.com/" target="_blank">Tomato Timer</a><br>
+        • Renk Oyunu: <a href="https://www.helpfulgames.com/subjects/brain-training/memory.html" target="_blank">Memory Game</a><br>
+        • Film: <a href="https://www.themoviedb.org/" target="_blank">TMDB</a>
     </div>
-    
-    
-    <div class="proje yapim-asamasinda" onclick="window.location='04-film-formu/';">
-        <a href="04-film-formu/">🎬 Film Bilgi Kartı <span class="tag">Yapım Aşamasında</span></a>
-        <p>Formdan girilen bilgilerle film kartı oluşturma (Çok yakında...)</p>
-        <small>🔗 Canlı: <a href="#" onclick="alert('Bu proje henüz yayında değil! Yakında eklenecek.'); event.stopPropagation(); return false;">Yakında</a></small>
-    </div>
-    
-    <div class="github-link">
-        📂 <a href="https://github.com/ensartrtp/web-programlama-calismalari" target="_blank">GitHub'da Görüntüle</a>
-    </div>
-
-    <script>
-        document.querySelectorAll('.proje small a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.stopPropagation(); 
-            });
-        });
-    </script>
 </body>
 </html>
-
