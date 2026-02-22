@@ -1,0 +1,221 @@
+<html>
+<head>
+    <title>Film Formu</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            text-align: center;
+            padding:20px;
+            font-family: Arial;
+            background: #f2f2f2
+        }
+        #bilgikismi {
+            background: #5a4e8b;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 20px;
+            width: 300px; 
+            height: 400px;
+            vertical-align: top;
+            box-sizing: border-box;
+        }
+        #ciktikismi {
+            background: rgb(61, 112, 167);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 20px;
+            width: 300px; 
+            height: 400px;
+            vertical-align: top;
+            box-sizing: border-box;
+            overflow-y: auto;
+            word-wrap: break-word; 
+            overflow-wrap: break-word; 
+        }
+        #bilgikismi input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 200px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        #güncelle {
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #cikti_afis {
+            max-width: 200px;
+            max-height: 150px;
+            object-fit: contain;
+        }
+        #cikti_film_adi {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+            margin: 10px 0;
+        }
+        #cikti_film_aciklama {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal; 
+            max-width: 100%;
+            padding: 0 5px;
+            text-align: left;
+        }
+        .karakter-sayac {
+            font-size: 12px;
+            color: #fff;
+            margin-top: 5px;
+            text-align: right;
+            padding-right: 45px;
+        }
+        .karakter-sayac.warning {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        #film_adi:focus {
+            outline: 2px solid #4CAF50;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="bilgikismi">
+        <h1>Film Bilgileri</h1>
+        <form id="filmform">
+            <input type="text" id="film_adi" placeholder="Film Adı (max 50 karakter)" maxlength="50">
+            <div id="filmAdiSayac" class="karakter-sayac">0/50</div>
+            
+            <input type="text" id="imdb_puani" placeholder="IMDB Puanı">
+            <input type="text" id="afisurl" placeholder="Afiş URL'si">
+            <input type="text" id="film_aciklama" placeholder="Film Açıklaması (max 200 karakter)" maxlength="200">
+            <div id="filmAciklamaSayac" class="karakter-sayac">0/200</div>
+        </form>
+        <button id="güncelle">Kartı Güncelle</button>
+    </div>
+
+    <div id="ciktikismi">
+        <h2 id="cikti_film_adi">Film Adı</h2>
+        <img id="cikti_afis" src="" alt="Film Afişi" width="200">
+        <h3 id="cikti_imdb_puani">IMDB Puanı: </h3>
+        <p id="cikti_film_aciklama">Film Açıklaması</p>
+    </div>
+
+    <script>
+    
+        function updateCharCount(inputId, counterId, maxLength) {
+            var input = document.getElementById(inputId);
+            var counter = document.getElementById(counterId);
+            var length = input.value.length;
+            
+            counter.textContent = length + "/" + maxLength;
+            
+            if (length >= maxLength) {
+                counter.classList.add('warning');
+            } else {
+                counter.classList.remove('warning');
+            }
+        }
+
+    
+        document.getElementById("film_adi").addEventListener("input", function() {
+            document.getElementById("cikti_film_adi").innerText = this.value || "Film Adı";
+            updateCharCount("film_adi", "filmAdiSayac", 50);
+        });
+
+    
+        document.getElementById("imdb_puani").addEventListener("input", function() {
+            document.getElementById("cikti_imdb_puani").innerText = "IMDB Puanı: " + (this.value || "");
+        });
+
+    
+        document.getElementById("afisurl").addEventListener("input", function() {
+            if (this.value) {
+                document.getElementById("cikti_afis").src = this.value;
+            }
+        });
+
+    
+        document.getElementById("film_aciklama").addEventListener("input", function() {
+            document.getElementById("cikti_film_aciklama").innerText = this.value || "Film Açıklaması";
+            updateCharCount("film_aciklama", "filmAciklamaSayac", 200);
+        });
+
+        
+        document.getElementById("güncelle").addEventListener("click", function() {
+            var filmAdi = document.getElementById("film_adi").value;
+            var imdbPuani = document.getElementById("imdb_puani").value;
+            var afisUrl = document.getElementById("afisurl").value;
+            var filmAciklama = document.getElementById("film_aciklama").value;
+
+        
+            document.getElementById("cikti_film_adi").innerText = filmAdi || "Film Adı";
+            document.getElementById("cikti_imdb_puani").innerText = "IMDB Puanı: " + (imdbPuani || "");
+            if (afisUrl) document.getElementById("cikti_afis").src = afisUrl;
+            document.getElementById("cikti_film_aciklama").innerText = filmAciklama || "Film Açıklaması";
+            
+            document.getElementById("filmform").reset();
+            
+            
+            document.getElementById("filmAdiSayac").textContent = "0/50";
+            document.getElementById("filmAdiSayac").classList.remove('warning');
+            document.getElementById("filmAciklamaSayac").textContent = "0/200";
+            document.getElementById("filmAciklamaSayac").classList.remove('warning');
+        });
+
+    
+        const inputs = document.querySelectorAll("#filmform input");
+        inputs.forEach(i => i.addEventListener("keydown", e => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                document.getElementById("güncelle").click();
+            }
+        }));
+
+    
+        document.getElementById("cikti_film_adi").addEventListener("dblclick", function() {
+            var yeni1 = window.prompt('Yeni Film Adı (max 50 karakter):', this.innerText); 
+            if (yeni1 != null && yeni1 != "" && yeni1.length <= 50) {
+                document.getElementById("cikti_film_adi").innerText = yeni1;
+                document.getElementById("film_adi").value = yeni1;
+                updateCharCount("film_adi", "filmAdiSayac", 50);
+            } else if (yeni1 && yeni1.length > 50) {
+                alert("Film adı en fazla 50 karakter olabilir!");
+            }
+        });
+
+        document.getElementById("cikti_imdb_puani").addEventListener("dblclick", function() {
+            var currentPuan = this.innerText.replace("IMDB Puanı: ", "");
+            var yeni2 = window.prompt('Yeni IMDB Puanı:', currentPuan);
+            if (yeni2 != null && yeni2 != ""){
+                document.getElementById("cikti_imdb_puani").innerText = "IMDB Puanı: " + yeni2;
+                document.getElementById("imdb_puani").value = yeni2;
+            }
+        });
+
+        document.getElementById("cikti_film_aciklama").addEventListener("dblclick", function() {
+            var yeni3 = window.prompt('Yeni Açıklama (max 200 karakter):', this.innerText);
+            if (yeni3 != null && yeni3 != "" && yeni3.length <= 200) {
+                document.getElementById("cikti_film_aciklama").innerText = yeni3;
+                document.getElementById("film_aciklama").value = yeni3;
+                updateCharCount("film_aciklama", "filmAciklamaSayac", 200);
+            } else if (yeni3 && yeni3.length > 200) {
+                alert("Film açıklaması en fazla 200 karakter olabilir!");
+            }
+        });
+
+        document.getElementById("cikti_afis").onerror = function() {
+            this.src = "";
+        };
+    </script>
+</body>
+</html>
