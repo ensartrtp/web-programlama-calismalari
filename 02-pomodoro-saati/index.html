@@ -1,0 +1,273 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pomodoro Saati</title>
+    <style>
+		body{background-color:#2c266682; display: flex; flex-direction: column; align-items: center; height: 100vh; font-family: Arial, sans-serif; margin: 0;}
+        h1{ text-align: center; margin-top: 50px;}
+		button{ margin:5px; position:relative; top:10px; width: 30px; height: 30px;}
+        p{ text-indent: 15px; text-align: left; margin-top: 20px; max-width: 600px;}
+		#kapsayici{ display: flex; justify-content: center; gap: 20px;}
+        .butonozellik{width: 80px; height: 40px; background-color: #1b1bd1; color: white; border: none; border-radius: 5px; cursor: pointer;}
+        .box{ margin-top: 15px; height:100px; width: 150px;  padding: 15px;  border: 1px solid #0c0ceb; border-radius: 8px; background-color: #724e47; text-align: center;}
+        #butonlar{ display: flex; justify-content: center; gap: 10px; margin-top: 20px;}
+        .ses-btn{ background-color: #4CAF50; color: white; padding: 8px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 10px 0; width: auto; height: auto;}
+        .ses-btn:hover{ background-color: #45a049;}
+        .ses-btn:disabled{ background-color: #cccccc; cursor: not-allowed;}
+    </style>
+</head>
+<body>
+
+    <h1>Pomodoro Saati</h1>
+    <p>Pomodoro tekniği, 25 dakika çalışma ve ardından 5 dakika ara verme prensibine dayanır. Bu döngü, odaklanmayı artırmak ve verimliliği yükseltmek için tasarlanmıştır. Dilerseniz ders ve ara sürelerini ayarlayabilirsiniz.</p>
+
+    <!-- Sadece ses izni butonu -->
+    <div style="text-align: center;">
+        <button id="sesIzniBtn" class="ses-btn">🔊 Ses İzni Ver</button>
+    </div>
+
+    <div id="kapsayici">
+        
+	<div id="dersbox" class="box">
+    Ders Süresi: <span id="timer">25:00</span><br>
+	<button id="arttirders">▲</button>
+    <button id="azaltders">▼</button>
+	</div>
+	
+	<div id="arabox" class="box">
+    Ara Süresi: <span id="break-timer">05:00</span><br>
+	<button id="arttirara">▲</button>
+    <button id="azaltara">▼</button>
+    
+    </div>
+
+    </div>
+
+    <div id="butonlar">
+    <button id="start" class="butonozellik">Başlat ▶</button>
+    <button id="stop" class="butonozellik">Durdur ❚❚</button>
+    <button id="reset" class="butonozellik">Sıfırla ↻</button>
+    
+    </div>
+
+    <div style="background: white; padding: 15px; border-radius: 10px; margin-top: 30px;">
+    <h3 style="color: #333;">&nbsp;&nbsp;&nbsp;&nbsp;İstatistikler</h3>
+    <p>Toplam Çalışma: <span id="toplamCalisma">0</span> dakika</p>
+    <p>Tamamlanan Döngü: <span id="tamDongu">0</span></p>
+    </div>
+
+    <script>
+        let timerElement = document.getElementById('timer');
+        let breakTimerElement = document.getElementById('break-timer');
+        let arttirdersButton = document.getElementById('arttirders');
+        let azaltdersButton = document.getElementById('azaltders');
+        let startButton = document.getElementById('start');
+        let stopButton = document.getElementById('stop');
+        let resetButton = document.getElementById('reset');
+        let arttiraraButton = document.getElementById('arttirara');
+        let azaltaraButton = document.getElementById('azaltara');
+        let toplamCalismaSpan = document.getElementById('toplamCalisma');
+        let tamDonguSpan = document.getElementById('tamDongu');
+        let sesIzniBtn = document.getElementById('sesIzniBtn');
+
+        let dersSuresi = 25 * 60; 
+        let araSuresi = 5 * 60;        
+        let kalanDersSuresi = dersSuresi;
+        let kalanAraSuresi = araSuresi;
+        let timer;
+        let isRunning = false;
+        let dersModu = true; 
+        let donguSayisi = 0;
+        let toplamCalisma = 0;
+        
+        // Ses değişkenleri
+        let audioCtx = null;
+        let sesIzniVar = false;
+        
+        // Basit bip sesi
+        function bipSesi() {
+            if (!sesIzniVar || !audioCtx) return;
+            
+            try {
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                
+                oscillator.type = 'sine';
+                oscillator.frequency.value = 800;
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                gainNode.gain.value = 0.2;
+                
+                oscillator.start();
+                setTimeout(() => oscillator.stop(), 200);
+            } catch (e) {}
+        }
+        
+        
+        function alarmSesi() {
+            if (!sesIzniVar || !audioCtx) return;
+            
+            try {
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        const oscillator = audioCtx.createOscillator();
+                        const gainNode = audioCtx.createGain();
+                        
+                        oscillator.type = 'sine';
+                        oscillator.frequency.value = 800;
+                        
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioCtx.destination);
+                        
+                        gainNode.gain.value = 0.2;
+                        
+                        oscillator.start();
+                        setTimeout(() => oscillator.stop(), 150);
+                    }, i * 200);
+                }
+            } catch (e) {}
+        }
+        
+        
+        function sesIzniAl() {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            audioCtx.resume().then(() => {
+                sesIzniVar = true;
+                sesIzniBtn.textContent = '✅ Ses İzni Verildi';
+                sesIzniBtn.style.backgroundColor = '#45a049';
+                sesIzniBtn.disabled = true;
+                
+                // Test bipi
+                bipSesi();
+            }).catch(e => {
+                console.log('Ses izni alınamadı');
+            });
+        }
+		
+        
+        sesIzniBtn.addEventListener('click', sesIzniAl);
+
+        function formatTime(saniye) {
+            let minutes = Math.floor(saniye / 60);
+            let seconds = saniye % 60;
+            return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function updateTimer() {
+            timerElement.textContent = formatTime(kalanDersSuresi);
+        }
+        
+        function updateBreakTimer() {
+            breakTimerElement.textContent = formatTime(kalanAraSuresi);
+        }
+
+        function resetTimers() {
+            kalanDersSuresi = dersSuresi;
+            kalanAraSuresi = araSuresi;
+            dersModu = true;
+            timerElement.textContent = formatTime(kalanDersSuresi);
+            breakTimerElement.textContent = formatTime(kalanAraSuresi);
+        }
+
+        function updateIstatistikler() {
+            toplamCalismaSpan.textContent = toplamCalisma;
+            tamDonguSpan.textContent = donguSayisi;
+        }
+
+        arttirdersButton.addEventListener('click', () => {
+            if (!isRunning) {
+                dersSuresi += 60;
+                kalanDersSuresi += 60;
+                updateTimer();
+            }
+        });
+
+        azaltdersButton.addEventListener('click', () => {
+            if (!isRunning && dersSuresi > 60) {
+                dersSuresi -= 60;
+                kalanDersSuresi -= 60;
+                updateTimer();
+            }
+        });
+
+        arttiraraButton.addEventListener('click', () => {
+            if (!isRunning) {
+                araSuresi += 60;
+                kalanAraSuresi += 60;
+                updateBreakTimer();
+            }
+        });
+
+        azaltaraButton.addEventListener('click', () => {
+            if (!isRunning && araSuresi > 60) {
+                araSuresi -= 60;
+                kalanAraSuresi -= 60;
+                updateBreakTimer();
+            }
+        });
+
+        startButton.addEventListener('click', () => {
+            if (!isRunning) {
+                isRunning = true;
+                
+                timer = setInterval(() => {
+                    if (dersModu) {
+                        if (kalanDersSuresi > 0) {
+                            kalanDersSuresi--;
+                            timerElement.textContent = formatTime(kalanDersSuresi);
+                            let gecenSure = dersSuresi - kalanDersSuresi;
+                            toplamCalisma = Math.floor((toplamCalisma * 60 + gecenSure) / 60);
+                            updateIstatistikler();
+                        } 
+                        
+                        if (kalanDersSuresi === 0) {
+                            alarmSesi();
+                            
+                            dersModu = false;
+                            breakTimerElement.textContent = formatTime(kalanAraSuresi);
+                        }
+                    } else {
+                        if (kalanAraSuresi > 0) {
+                            kalanAraSuresi--;
+                            breakTimerElement.textContent = formatTime(kalanAraSuresi);
+                        }
+                        
+                        if (kalanAraSuresi === 0) {
+                            donguSayisi++;
+                            alarmSesi();
+                            
+                            dersModu = true;
+                            kalanDersSuresi = dersSuresi;
+                            kalanAraSuresi = araSuresi;
+                            timerElement.textContent = formatTime(kalanDersSuresi);
+                            breakTimerElement.textContent = formatTime(kalanAraSuresi);
+                        }
+                    }
+                }, 1000);
+            }
+        });
+
+        stopButton.addEventListener('click', () => {
+            clearInterval(timer);
+            isRunning = false;
+        });
+
+        resetButton.addEventListener('click', () => {
+            clearInterval(timer);
+            isRunning = false;
+            dersSuresi = 25 * 60;
+            araSuresi = 5 * 60;
+            donguSayisi = 0;
+            toplamCalisma = 0;
+            resetTimers();
+            updateIstatistikler();
+        });
+
+        updateIstatistikler();
+        resetTimers();
+
+    </script>
+</body>
+</html>
