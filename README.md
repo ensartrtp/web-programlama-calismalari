@@ -1,2 +1,19 @@
-# web-programlama-calismalari
-Bu repoda HTML, CSS ve JavaScript ile geliştirdiğim küçük web projeleri yer alıyor. Her proje farklı bir konsepti öğrenmek ve uygulamak amacıyla yapıldı.
+#  Web Programlama Çalışmalarım
+
+Bu repoda HTML, CSS ve JavaScript kullanarak geliştirdiğim küçük çaplı web projeleri bulunmaktadır. Her bir proje farklı bir konsepti öğrenmek ve uygulamak amacıyla hazırlanmıştır.
+
+##  Canlı Demo 🔗 <a href="https://ensartrtp.github.io/web-programlama-calismalari/">
+
+## 🎯 Amaç
+
+Bu projelerle:
+- ✅ HTML yapısını pekiştirmek
+- ✅ CSS ile tasarım yapmayı öğrenmek
+- ✅ JavaScript mantığını kavramak
+- ✅ DOM manipülasyonunu anlamak
+- ✅ Responsive tasarım prensiplerini uygulamak
+
+
+## 📌 Not
+
+Bu projeler öğrenme amaçlıdır ve sürekli geliştirilmektedir. Zamanla yeni projeler eklenecek ve mevcut projeler iyileştirilecektir.
